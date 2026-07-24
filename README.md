@@ -1,6 +1,6 @@
-# 🍨 SW!RLS — Premium Ice Cream Experience
-
 <div align="center">
+
+<img src="./essentials/SWIRLS.png" alt="SW!RLS" width="420">
 
 **A modern, highly interactive concept landing page for *Swirls*, a luxury ice cream brand.**
 
@@ -69,8 +69,8 @@ To run this project locally:
 **1. Clone the repository**
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/swirls-icecream.git
-cd swirls-icecream
+git clone https://github.com/hemal0651/swirls-icecream-concept.git
+cd swirls-icecream-concept
 ```
 
 **2. Install dependencies**
