@@ -1,0 +1,2529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SW!RLS — Delicious Ice Cream</title>
+  <meta name="description" content="SW!RLS Ice Cream — Designed for your well-being with incredible taste.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ==========================================
+   FONT FACE DECLARATIONS
+   ========================================== */
+@font-face {
+  font-family: 'VerdantVitality';
+  src: url('essentials/VerdantVitality-Regular.otf') format('opentype'),
+       url('../verdant-vitality/VerdantVitality-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Rimouski';
+  src: url('essentials/rimouski sb.ttf') format('truetype'),
+       url('essentials/rimouski-sb.ttf') format('truetype'),
+       url('../rimouski/rimouski sb.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ==========================================
+   THEME VARIABLES & RESET
+   ========================================== */
+:root {
+  --theme-primary: #3d1a06;
+  --theme-secondary-btn: #542b15;
+  --theme-btn-shadow: #180601;
+  --theme-order-text: #240d04;
+  --theme-subtext: #7a5040;
+  --theme-social-btn: rgba(90, 44, 16, 0.14);
+  --theme-social-icon: #5a2c10;
+  --theme-light-bg: #faf1e4;
+  --theme-dark-bg: #240d04;
+  --theme-card-text: #3d1a06;
+  --theme-card-desc: #7a5040;
+  --theme-preview-bg: radial-gradient(circle at center, rgba(250, 241, 228, 0.8) 0%, rgba(240, 225, 205, 0.4) 100%);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  font-family: 'Rimouski', 'Manrope', sans-serif;
+  background: var(--theme-dark-bg);
+  color: #ffffff;
+  transition: background 0.75s ease;
+}
+
+/* ==========================================
+   CUSTOM SW!RLS DYNAMIC SCROLLBAR
+   ========================================== */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--theme-dark-bg);
+  transition: background 0.75s ease;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--theme-primary);
+  border-radius: 999px;
+  border: 2px solid var(--theme-dark-bg);
+  transition: background 0.75s ease, border-color 0.75s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--theme-secondary-btn);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--theme-primary) var(--theme-dark-bg);
+}
+
+/* ==========================================
+   FIGMA / POWERPOINT SMART ANIMATE & MOTION SYSTEM
+   ========================================== */
+.reveal {
+  opacity: 0;
+  transition: transform 0.95s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.95s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+
+.reveal-up {
+  transform: translateY(60px);
+}
+
+.reveal-left {
+  transform: translateX(-70px);
+}
+
+.reveal-right {
+  transform: translateX(70px);
+}
+
+.reveal-scale {
+  transform: scale(0.86);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0) translateX(0) scale(1);
+}
+
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; }
+.delay-3 { transition-delay: 0.3s; }
+.delay-4 { transition-delay: 0.4s; }
+.delay-5 { transition-delay: 0.5s; }
+.delay-6 { transition-delay: 0.6s; }
+
+@keyframes floatGentle {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0px); }
+}
+
+/* ==========================================
+   HERO STAGE SECTION
+   ========================================== */
+.hero-stage {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+  margin-bottom: -2px;
+}
+
+.bg-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.75s ease;
+}
+
+.bg-layer.on {
+  opacity: 1;
+}
+
+#bg-choco {
+  background: radial-gradient(120% 95% at 50% 25%, #4e220d 0%, #341507 55%, #1a0802 100%);
+}
+
+#bg-raspberry {
+  background: radial-gradient(120% 95% at 50% 25%, #7a1532 0%, #520a1f 55%, #24030b 100%);
+}
+
+#bg-banana {
+  background: radial-gradient(120% 95% at 50% 25%, #6e480f 0%, #4a2f06 55%, #211301 100%);
+}
+
+#bg-caramel {
+  background: radial-gradient(120% 95% at 50% 25%, #96590d 0%, #522d04 55%, #2b1601 100%);
+}
+
+#bg-strawberry {
+  background: radial-gradient(120% 95% at 50% 25%, #b33252 0%, #5e1024 55%, #300611 100%);
+}
+
+#bg-mint {
+  background: radial-gradient(120% 95% at 50% 25%, #1e6b50 0%, #0d3829 55%, #051a12 100%);
+}
+
+/* HEADER NAVBAR */
+.header-nav {
+  position: absolute;
+  top: 24px;
+  left: 0;
+  right: 0;
+  height: 52px;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 44px;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.header-logo img {
+  height: 48px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
+}
+
+.nav-center-pill {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border-radius: 999px;
+  padding: 4px 6px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.18);
+}
+
+.nav-item-link {
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 0.94rem;
+  letter-spacing: 0.08em;
+  color: #3d1a06;
+  padding: 10px 26px;
+  border-radius: 999px;
+  transition: all 0.3s ease;
+}
+
+.nav-item-link:hover {
+  color: #000000;
+  background: rgba(0,0,0,0.05);
+}
+
+.nav-item-link.active {
+  background: var(--theme-primary);
+  color: #ffffff;
+}
+
+.nav-icons-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.nav-icon-btn {
+  background: none;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.nav-icon-btn:hover {
+  background: rgba(255,255,255,0.15);
+  transform: scale(1.08);
+}
+
+.cart-container {
+  position: relative;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: #ff0d1a;
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid #341507;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* TOP RIGHT CHIPS */
+.chips-container {
+  position: absolute;
+  top: 104px;
+  right: 44px;
+  display: flex;
+  gap: 12px;
+  z-index: 40;
+}
+
+.chip-button {
+  width: 52px;
+  height: 52px;
+  min-width: 52px;
+  min-height: 52px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  border: none;
+  color: #ffffff;
+  font-family: 'Rimouski', 'Manrope', sans-serif;
+  font-weight: 800;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  box-sizing: border-box;
+}
+
+.chip-button:hover {
+  background: rgba(255, 255, 255, 0.32);
+  color: #ffffff;
+}
+
+.chip-button.active {
+  background: #ffffff;
+  color: #3d1a06;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+  transform: none;
+}
+
+/* HERO CONTENT (LEFT ALIGNED) */
+.hero-content-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 44%;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 60px 0 100px 60px;
+  pointer-events: none;
+}
+
+.hero-content-left * {
+  pointer-events: auto;
+}
+
+.hero-title {
+  font-family: 'VerdantVitality', 'Fredoka', cursive, sans-serif;
+  font-weight: 700;
+  font-size: clamp(4.2rem, 6.8vw, 6.8rem);
+  color: #ffffff;
+  line-height: 1.02;
+  letter-spacing: 0.05em;
+  text-shadow: 0 4px 24px rgba(0,0,0,0.35);
+  margin-bottom: 22px;
+}
+
+.hero-paragraph {
+  font-size: 1.1rem;
+  line-height: 1.76;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 34px;
+  max-width: 360px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.btn-primary-order {
+  padding: 16px 36px;
+  border-radius: 999px;
+  background: #f7efe4;
+  border: none;
+  color: var(--theme-order-text);
+  font-family: 'Rimouski', 'Manrope', sans-serif;
+  font-weight: 800;
+  font-size: 0.98rem;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 0 #180601, 0 8px 18px rgba(0,0,0,0.25);
+  white-space: nowrap;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-primary-order:hover {
+  background: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #180601, 0 12px 24px rgba(0,0,0,0.35);
+}
+
+.btn-primary-order:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #180601;
+}
+
+.btn-secondary-menu {
+  padding: 16px 36px;
+  border-radius: 999px;
+  background: var(--theme-secondary-btn);
+  border: none;
+  color: #ffffff;
+  font-family: 'Rimouski', 'Manrope', sans-serif;
+  font-weight: 800;
+  font-size: 0.98rem;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 0 #180601, 0 8px 18px rgba(0,0,0,0.25);
+  white-space: nowrap;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-secondary-menu:hover {
+  filter: brightness(1.15);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #180601, 0 12px 24px rgba(0,0,0,0.35);
+}
+
+.btn-secondary-menu:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #180601;
+}
+
+/* CAROUSEL CUPS TRACK */
+.track-container {
+  position: relative;
+  width: 100%;
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 10;
+  overflow: visible;
+}
+
+.cup {
+  position: absolute;
+  bottom: 8%;
+  left: 54%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.65s cubic-bezier(.34, 1.5, .55, 1), opacity 0.5s ease, filter 0.5s ease;
+  will-change: transform;
+}
+
+.cup img {
+  width: clamp(380px, 34vw, 540px);
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 30px 28px rgba(0,0,0,0.35));
+  pointer-events: none;
+  user-select: none;
+  transition: filter 0.5s ease;
+}
+
+.cup.dim img {
+  filter: drop-shadow(0 20px 18px rgba(0,0,0,0.25)) brightness(0.92) saturate(0.85);
+}
+
+.shadow-ellipse {
+  width: 70%;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.38);
+  filter: blur(9px);
+  margin-top: -10px;
+  transition: opacity 0.5s ease, width 0.65s ease;
+}
+
+/* WAVE FLOOR BOTTOM OF HERO */
+.wave-floor {
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 101%;
+  height: 24.5%;
+  z-index: 5;
+  pointer-events: none;
+  transform: translateY(3px);
+}
+
+.wave-floor svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* CONTROLS (BOTTOM CENTER) */
+.controls-bar {
+  position: absolute;
+  bottom: 3.8vh;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  z-index: 30;
+}
+
+.arrow-btn {
+  background: transparent;
+  border: 1.5px solid var(--theme-primary);
+  color: var(--theme-primary);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease, transform 0.15s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.arrow-btn:hover {
+  background: var(--theme-primary);
+  color: #ffffff;
+}
+
+.arrow-btn:active {
+  transform: scale(0.9);
+}
+
+.dots {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--theme-primary);
+  opacity: 0.3;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.dot.on {
+  background: var(--theme-primary);
+  opacity: 1;
+  transform: scale(1.35);
+}
+
+/* SOCIAL PROOF (BOTTOM LEFT) */
+.social-proof-bottom {
+  position: absolute;
+  bottom: 24px;
+  left: 60px;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.avatar-group {
+  display: flex;
+}
+
+.avatar-item {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2.5px solid #faf1e4;
+  object-fit: cover;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.avatar-item:not(:first-child) {
+  margin-left: -12px;
+}
+
+.proof-text strong {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--theme-primary);
+  display: block;
+  transition: color 0.3s ease;
+}
+
+.proof-text span {
+  font-size: 0.85rem;
+  color: var(--theme-subtext);
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+/* SOCIAL LINKS (BOTTOM RIGHT) */
+.social-links-bottom {
+  position: absolute;
+  bottom: 24px;
+  right: 60px;
+  z-index: 30;
+  display: flex;
+  gap: 12px;
+}
+
+.social-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--theme-social-btn);
+  color: var(--theme-social-icon);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.social-btn:hover {
+  background: var(--theme-primary);
+  color: #ffffff;
+  transform: translateY(-3px);
+}
+
+/* ==========================================
+   SECTION 2: MENU SHOWCASE CARDS GRID (#menu)
+   ========================================== */
+.menu-section {
+  position: relative;
+  background: var(--theme-light-bg);
+  color: var(--theme-card-text);
+  padding: 80px 60px 120px 60px;
+  z-index: 20;
+  transition: background 0.75s ease, color 0.75s ease;
+}
+
+.section-header {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 50px auto;
+}
+
+.section-title {
+  font-family: 'VerdantVitality', 'Fredoka', cursive, sans-serif;
+  font-size: clamp(2.8rem, 4.5vw, 4.2rem);
+  color: var(--theme-primary);
+  line-height: 1.05;
+  margin-bottom: 14px;
+  transition: color 0.75s ease;
+}
+
+.section-subtitle {
+  font-size: 1.05rem;
+  color: var(--theme-subtext);
+  font-weight: 600;
+  transition: color 0.75s ease;
+}
+
+/* Category Filter Tabs */
+.menu-filter-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 44px;
+  flex-wrap: wrap;
+}
+
+.filter-tab-btn {
+  background: var(--theme-social-btn);
+  border: none;
+  color: var(--theme-primary);
+  font-family: 'Rimouski', 'Manrope', sans-serif;
+  font-weight: 800;
+  font-size: 0.9rem;
+  padding: 10px 24px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.filter-tab-btn:hover {
+  background: rgba(61, 26, 6, 0.16);
+}
+
+.filter-tab-btn.active {
+  background: var(--theme-primary);
+  color: #ffffff;
+}
+
+/* Menu Grid (Glassmorphism layout as in Reference Image 1) */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 36px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.menu-card {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: 0 12px 36px rgba(61, 26, 6, 0.08);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.75s ease;
+  border: 1px solid var(--theme-social-btn);
+}
+
+.menu-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 48px rgba(61, 26, 6, 0.15);
+}
+
+.card-top-preview {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--theme-preview-bg);
+  border-radius: 18px;
+  margin-bottom: 20px;
+  transition: background 0.75s ease;
+}
+
+.card-top-preview img {
+  max-height: 180px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 14px 16px rgba(0,0,0,0.18));
+  transition: transform 0.3s ease;
+}
+
+.menu-card:hover .card-top-preview img {
+  transform: scale(1.08) rotate(-2deg);
+}
+
+.card-rating-badge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--theme-primary);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.75s ease;
+}
+
+.card-title {
+  font-family: 'VerdantVitality', 'Fredoka', cursive, sans-serif;
+  font-size: 1.6rem;
+  color: var(--theme-primary);
+  margin-bottom: 6px;
+  line-height: 1.1;
+  transition: color 0.75s ease;
+}
+
+.card-desc {
+  font-size: 0.86rem;
+  color: var(--theme-card-desc);
+  line-height: 1.5;
+  margin-bottom: 20px;
+  flex: 1;
+  transition: color 0.75s ease;
+}
+
+.card-bottom-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+.card-price {
+  font-family: 'VerdantVitality', cursive;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--theme-primary);
+  transition: color 0.75s ease;
+}
+
+.add-cart-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--theme-primary);
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.75s ease, box-shadow 0.25s ease;
+  box-shadow: 0 4px 12px rgba(61, 26, 6, 0.25);
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+.add-cart-btn:hover {
+  background: var(--theme-secondary-btn);
+  color: #ffffff;
+  transform: translateY(-2px) scale(1.08) translateZ(0);
+  box-shadow: 0 8px 20px rgba(61, 26, 6, 0.35);
+}
+
+.add-cart-btn:active {
+  transform: translateY(1px) scale(0.94) translateZ(0);
+  box-shadow: 0 2px 8px rgba(61, 26, 6, 0.2);
+}
+
+/* ORGANIC WAVE OVERLAYS */
+.about-section {
+  position: relative;
+  background: var(--theme-dark-bg);
+  color: #ffffff;
+  padding: 170px 60px 200px 60px;
+  z-index: 20;
+  transition: background 0.75s ease;
+}
+
+.about-wave-top {
+  position: absolute;
+  top: -158px;
+  left: 0;
+  width: 100.5%;
+  height: 160px;
+  z-index: 25;
+  pointer-events: none;
+}
+
+.about-wave-top svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.quiz-section {
+  position: relative;
+  background: var(--theme-light-bg);
+  color: var(--theme-card-text);
+  padding: 100px 60px 120px 60px;
+  z-index: 20;
+  transition: background 0.75s ease, color 0.75s ease;
+}
+
+.quiz-wave-top {
+  position: absolute;
+  top: -158px;
+  left: 0;
+  width: 100.5%;
+  height: 160px;
+  z-index: 25;
+  pointer-events: none;
+}
+
+.quiz-wave-top svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.about-layout-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.1fr 1.3fr 1.1fr;
+  align-items: center;
+  gap: 60px;
+}
+
+/* Feature Columns Surrounding Center Cup */
+.feature-col {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.feature-box {
+  position: relative;
+}
+
+.feature-num {
+  font-family: 'VerdantVitality', 'Fredoka', cursive, sans-serif;
+  font-size: 5.5rem;
+  color: rgba(255, 255, 255, 0.12);
+  line-height: 1;
+  margin-bottom: -24px;
+}
+
+.feature-box-title {
+  font-family: 'Rimouski', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #faf1e4;
+  margin-bottom: 12px;
+}
+
+.feature-box-desc {
+  font-size: 1.02rem;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.65;
+}
+
+/* Center Showcase Cup (Matching Image 1 center focal cup) */
+.about-center-showcase {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-cup-container {
+  width: 100%;
+  max-width: 440px;
+  height: 440px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 36px;
+  position: relative;
+}
+
+.about-cup-img {
+  max-width: 100%;
+  max-height: 440px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 30px 32px rgba(0,0,0,0.5));
+  animation: floatCup 4s ease-in-out infinite alternate;
+  transition: opacity 0.25s ease;
+}
+
+@keyframes floatCup {
+  0% { transform: translateY(0px); }
+  100% { transform: translateY(-16px); }
+}
+
+/* ORGANIC WAVE DIVIDER TO SECTION 4 */
+.wave-divider-to-quiz {
+  width: 100%;
+  height: 100px;
+  margin-top: -1px;
+}
+
+.wave-divider-to-quiz svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ==========================================
+   SECTION 4: INTERACTIVE FLAVOR QUIZ & CONTACT (#contact)
+   ========================================== */
+.quiz-card-banner {
+  max-width: 1280px;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 32px;
+  padding: 70px 80px;
+  box-shadow: 0 20px 60px rgba(61, 26, 6, 0.12);
+  text-align: center;
+}
+
+.quiz-badge {
+  display: inline-block;
+  background: var(--theme-social-btn);
+  color: var(--theme-primary);
+  font-weight: 800;
+  font-size: 0.85rem;
+  padding: 8px 20px;
+  border-radius: 999px;
+  margin-bottom: 18px;
+  transition: all 0.75s ease;
+}
+
+.quiz-title {
+  font-family: 'VerdantVitality', 'Fredoka', cursive, sans-serif;
+  font-size: clamp(2.4rem, 4vw, 3.6rem);
+  color: var(--theme-primary);
+  margin-bottom: 16px;
+  line-height: 1.1;
+  transition: color 0.75s ease;
+}
+
+.quiz-desc {
+  font-size: 1.05rem;
+  color: var(--theme-subtext);
+  max-width: 540px;
+  margin: 0 auto 36px auto;
+  line-height: 1.6;
+  transition: color 0.75s ease;
+}
+
+/* Interactive Quiz Options Grid */
+.quiz-options-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-bottom: 36px;
+  text-align: left;
+}
+
+.quiz-opt-card {
+  border: 2px solid var(--theme-social-btn);
+  border-radius: 18px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.quiz-opt-card:hover {
+  border-color: var(--theme-primary);
+  background: rgba(61, 26, 6, 0.03);
+}
+
+.quiz-opt-card.selected {
+  border-color: var(--theme-primary);
+  background: var(--theme-primary);
+  color: #ffffff;
+}
+
+.quiz-opt-title {
+  font-weight: 800;
+  font-size: 1.05rem;
+  margin-bottom: 6px;
+}
+
+.quiz-opt-sub {
+  font-size: 0.82rem;
+  opacity: 0.8;
+}
+
+.quiz-result-box {
+  display: none;
+  background: var(--theme-light-bg);
+  border-radius: 20px;
+  padding: 30px;
+  margin-top: 24px;
+  text-align: center;
+  animation: fadeIn 0.4s ease;
+  transition: background 0.75s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.quiz-result-title {
+  font-family: 'VerdantVitality', cursive;
+  font-size: 2.2rem;
+  color: var(--theme-primary);
+  margin-bottom: 8px;
+  transition: color 0.75s ease;
+}
+
+/* Contact Form Grid */
+.contact-grid {
+  max-width: 1280px;
+  margin: 60px auto 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+}
+
+.contact-info-side h3 {
+  font-family: 'VerdantVitality', cursive;
+  font-size: 2.6rem;
+  color: var(--theme-primary);
+  margin-bottom: 16px;
+  transition: color 0.75s ease;
+}
+
+.contact-info-side p {
+  color: var(--theme-subtext);
+  font-size: 1.0rem;
+  line-height: 1.7;
+  margin-bottom: 24px;
+  transition: color 0.75s ease;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-input, .form-textarea {
+  width: 100%;
+  padding: 16px 20px;
+  border-radius: 14px;
+  border: 2px solid var(--theme-social-btn);
+  font-family: 'Rimouski', sans-serif;
+  font-size: 0.95rem;
+  background: #ffffff;
+  color: var(--theme-primary);
+  outline: none;
+  transition: border-color 0.25s ease, color 0.75s ease;
+}
+
+.form-input:focus, .form-textarea:focus {
+  border-color: var(--theme-primary);
+}
+
+.form-textarea {
+  resize: none;
+  height: 130px;
+}
+
+/* ==========================================
+   SECTION 5: FOOTER
+   ========================================== */
+.footer-section {
+  background: var(--theme-dark-bg);
+  color: #ffffff;
+  padding: 80px 60px 40px 60px;
+  position: relative;
+  transition: background 0.75s ease;
+}
+
+.footer-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+  gap: 40px;
+  margin-bottom: 60px;
+}
+
+.footer-brand img {
+  height: 48px;
+  margin-bottom: 20px;
+}
+
+.footer-brand p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  max-width: 280px;
+}
+
+.footer-col h4 {
+  font-family: 'Rimouski', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--theme-light-bg);
+  margin-bottom: 20px;
+  transition: color 0.75s ease;
+}
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer-links a {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: #ffffff;
+}
+
+.footer-newsletter-input {
+  padding: 12px 18px;
+  border-radius: 999px;
+  border: none;
+  font-family: 'Rimouski', 'Manrope', sans-serif;
+  font-size: 0.94rem;
+  font-weight: 600;
+  flex: 1;
+  outline: none;
+  background: #ffffff;
+  color: #3d1a06;
+}
+
+.footer-newsletter-input::placeholder {
+  font-family: 'Rimouski', 'Manrope', sans-serif;
+  color: #8c6e61;
+  opacity: 0.85;
+}
+
+.footer-newsletter-btn {
+  background: #faf1e4;
+  color: #3d1a06;
+  border: none;
+  border-radius: 999px;
+  padding: 12px 24px;
+  font-family: 'Rimouski', 'Manrope', sans-serif;
+  font-weight: 800;
+  font-size: 0.94rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 3px 0 #180601;
+}
+
+.footer-newsletter-btn:hover {
+  background: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 0 #180601;
+}
+
+.footer-bottom {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding-top: 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.85rem;
+}
+
+/* ==========================================
+   HAMBURGER MENU & MOBILE DRAWER
+   ========================================== */
+.hamburger-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: #ffffff;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.hamburger-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: scale(1.08);
+}
+
+.hamburger-btn svg { display: block; }
+
+/* Mobile drawer overlay */
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 200;
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.mobile-nav-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Mobile drawer panel */
+.mobile-nav-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: min(320px, 85vw);
+  height: 100%;
+  background: var(--theme-dark-bg);
+  z-index: 210;
+  transform: translateX(100%);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.75s ease;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 28px;
+  box-shadow: -20px 0 60px rgba(0,0,0,0.5);
+}
+
+.mobile-nav-drawer.open { transform: translateX(0); }
+
+.mobile-nav-close {
+  align-self: flex-end;
+  background: rgba(255,255,255,0.12);
+  border: none;
+  color: #ffffff;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-bottom: 24px;
+  transition: background 0.2s ease;
+}
+
+.mobile-nav-close:hover { background: rgba(255,255,255,0.25); }
+
+.mobile-nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mobile-nav-link {
+  font-family: 'VerdantVitality', 'Fredoka', cursive, sans-serif;
+  font-size: 2.2rem;
+  color: rgba(255,255,255,0.85);
+  text-decoration: none;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  transition: color 0.2s ease, transform 0.2s ease;
+  display: block;
+}
+
+.mobile-nav-link:hover {
+  color: #ffffff;
+  transform: translateX(8px);
+}
+
+.mobile-nav-footer {
+  margin-top: auto;
+  padding-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ==========================================
+   RESPONSIVE BREAKPOINTS — MOBILE FIRST
+   ========================================== */
+
+/* ---- TABLET (max 1024px) ---- */
+@media (max-width: 1024px) {
+  .hero-content-left {
+    width: 52%;
+    padding: 60px 0 100px 40px;
+  }
+
+  .cup img {
+    width: clamp(280px, 42vw, 420px);
+  }
+
+  .about-layout-container {
+    gap: 40px;
+  }
+
+  .quiz-card-banner {
+    padding: 50px 48px;
+  }
+
+  .footer-container {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+}
+
+/* ---- MOBILE (max 768px) ---- */
+@media (max-width: 768px) {
+  /* Show hamburger, hide desktop pill nav */
+  .hamburger-btn { display: flex; }
+  .mobile-nav-overlay { display: block; }
+  .nav-center-pill { display: none; }
+
+  /* Shrink the right icons slightly */
+  .header-nav {
+    padding: 0 18px;
+    height: 64px;
+  }
+
+  /* Hero: becomes a normal block-flow column */
+  .hero-stage {
+    height: auto;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-bottom: 100px;
+    overflow: visible;
+  }
+
+  .hero-content-left {
+    position: relative;
+    top: auto;
+    left: auto;
+    bottom: auto;
+    width: 100%;
+    padding: 120px 20px 10px 20px; /* Increased top padding so text sits comfortably below logo */
+    z-index: 30;
+    pointer-events: auto;
+    justify-content: flex-start;
+  }
+
+  .hero-title {
+    font-size: clamp(2.8rem, 12vw, 4.4rem);
+    margin-bottom: 14px;
+  }
+
+  .hero-paragraph {
+    font-size: 0.98rem;
+    margin-bottom: 20px;
+    max-width: 100%;
+  }
+
+  .hero-buttons {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .btn-primary-order,
+  .btn-secondary-menu {
+    padding: 13px 24px;
+    font-size: 0.88rem;
+  }
+
+  /* Cup carousel area — positioned comfortably lower below text & buttons with zero overlap */
+  .track-container {
+    position: relative;
+    width: 100%;
+    height: 270px;
+    flex: none;
+    overflow: visible;
+    z-index: 10;
+    margin-top: 28px;
+    margin-bottom: 16px;
+  }
+
+  .cup img {
+    width: clamp(170px, 50vw, 230px);
+    max-height: 250px;
+    object-fit: contain;
+    filter: drop-shadow(0 18px 22px rgba(0,0,0,0.45));
+  }
+
+  /* Chips — hide on mobile to avoid overlap */
+  .chips-container {
+    display: none;
+  }
+
+  /* Controls bar */
+  .controls-bar {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    transform: none;
+    justify-content: center;
+    margin-top: 36px;
+    margin-bottom: 24px;
+    z-index: 30;
+  }
+
+  /* Social proof & links — smaller */
+  .social-proof-bottom {
+    left: 20px;
+    bottom: 12px;
+    gap: 10px;
+  }
+
+  .social-proof-bottom .avatar-item {
+    width: 32px;
+    height: 32px;
+  }
+
+  .proof-text strong { font-size: 0.9rem; }
+  .proof-text span   { font-size: 0.78rem; }
+
+  .social-links-bottom {
+    right: 20px;
+    bottom: 14px;
+  }
+
+  /* Menu */
+  .menu-section {
+    padding: 60px 20px 170px 20px;
+  }
+
+  .menu-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  /* About Section Mobile Fix */
+  .about-section {
+    padding: 120px 20px 190px 20px;
+  }
+
+  .about-layout-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 40px;
+  }
+
+  .feature-col { gap: 40px; }
+
+  .feature-box { padding: 0 10px; }
+
+  .feature-num {
+    font-size: 3.8rem;
+    margin-bottom: -18px;
+  }
+
+  .about-center-showcase {
+    margin: 20px 0;
+  }
+
+  .about-cup-container {
+    height: auto;
+    max-width: 240px;
+    margin: 0 auto 20px auto;
+  }
+
+  .about-cup-img {
+    max-height: 240px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  /* Quiz & Contact */
+  .quiz-section { padding: 80px 20px 80px 20px; }
+
+  .quiz-card-banner {
+    padding: 36px 24px;
+    border-radius: 22px;
+  }
+
+  .quiz-options-grid { grid-template-columns: 1fr; }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    margin-top: 36px;
+  }
+
+  /* Symmetrical Mobile Footer */
+  .footer-section {
+    padding: 60px 20px 40px 20px;
+    text-align: center;
+  }
+
+  .footer-container {
+    grid-template-columns: 1fr 1fr;
+    gap: 36px 16px;
+    margin-bottom: 40px;
+  }
+
+  .footer-brand {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-brand img {
+    margin: 0 auto 14px auto;
+  }
+
+  .footer-brand p {
+    max-width: 320px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 0.9rem;
+    line-height: 1.55;
+  }
+
+  .footer-col h4 {
+    text-align: center;
+    margin-bottom: 14px;
+  }
+
+  .footer-links {
+    align-items: center;
+  }
+
+  .footer-links a {
+    text-align: center;
+  }
+
+  /* Centered Newsletter Subscription Box */
+  .footer-container > .footer-col:last-child {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 420px;
+    margin: 8px auto 0 auto;
+    width: 100%;
+  }
+
+  .footer-container > .footer-col:last-child p {
+    text-align: center;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+    padding-top: 24px;
+  }
+}
+
+/* ---- SMALL PHONE (max 480px) ---- */
+@media (max-width: 480px) {
+  .header-logo img { height: 34px; }
+
+  .hero-content-left { padding: 110px 18px 10px 18px; }
+
+  .hero-title { font-size: clamp(2.4rem, 14vw, 3.6rem); }
+
+  .track-container { height: 240px; }
+
+  .cup img { width: clamp(150px, 62vw, 230px); }
+
+  /* 1 column menu on small phones */
+  .menu-grid { grid-template-columns: 1fr; gap: 14px; }
+
+  .section-title { font-size: clamp(2rem, 9vw, 2.8rem); }
+
+  .about-cup-container { height: auto; max-width: 210px; margin: 0 auto 16px auto; }
+  .about-cup-img { max-height: 210px; }
+
+  .quiz-title { font-size: clamp(1.7rem, 7vw, 2.2rem); }
+
+  .quiz-card-banner { padding: 28px 18px; }
+
+  /* Keep 2-col links grid on small phone footer for clean symmetry */
+  .footer-container { grid-template-columns: 1fr 1fr; gap: 28px 12px; }
+
+  /* Tighten reveal travel on tiny screens */
+  .reveal-up    { transform: translateY(28px); }
+  .reveal-left  { transform: translateX(-28px); }
+  .reveal-right { transform: translateX(28px); }
+}
+</style>
+</head>
+<body>
+
+<!-- MOBILE NAVIGATION OVERLAY & DRAWER -->
+<div class="mobile-nav-overlay" id="mobileNavOverlay" onclick="closeMobileMenu()"></div>
+<div class="mobile-nav-drawer" id="mobileNavDrawer">
+  <button class="mobile-nav-close" onclick="closeMobileMenu()" aria-label="Close Menu">&times;</button>
+  <div style="margin-bottom: 30px;">
+    <img src="essentials/SWIRLS.png" alt="SW!RLS®" style="height: 42px;" onerror="this.src='../SWIRLS.png'">
+  </div>
+  <div class="mobile-nav-links">
+    <a href="#home" class="mobile-nav-link" onclick="closeMobileMenu()">HOME</a>
+    <a href="#menu" class="mobile-nav-link" onclick="closeMobileMenu()">MENU</a>
+    <a href="#about" class="mobile-nav-link" onclick="closeMobileMenu()">ABOUT</a>
+    <a href="#contact" class="mobile-nav-link" onclick="closeMobileMenu()">CONTACT</a>
+  </div>
+  <div class="mobile-nav-footer">
+    <a href="#menu" class="btn-primary-order" style="width: 100%; text-align: center; justify-content: center;" onclick="closeMobileMenu()">ORDER NOW</a>
+  </div>
+</div>
+
+<!-- ==========================================
+     SECTION 1: HERO STAGE (#home)
+     ========================================== -->
+<div class="hero-stage" id="home">
+  <!-- DYNAMIC BACKGROUND LAYERS -->
+  <div class="bg-layer on" id="bg-choco"></div>
+  <div class="bg-layer"    id="bg-raspberry"></div>
+  <div class="bg-layer"    id="bg-banana"></div>
+  <div class="bg-layer"    id="bg-caramel"></div>
+  <div class="bg-layer"    id="bg-strawberry"></div>
+  <div class="bg-layer"    id="bg-mint"></div>
+
+  <!-- HEADER NAVBAR -->
+  <header class="header-nav">
+    <a href="#home" class="header-logo">
+      <img src="essentials/SWIRLS.png" alt="SW!RLS®" onerror="this.src='../SWIRLS.png'">
+    </a>
+
+    <div class="nav-center-pill">
+      <a href="#home" class="nav-item-link active">HOME</a>
+      <a href="#menu" class="nav-item-link">MENU</a>
+      <a href="#about" class="nav-item-link">ABOUT</a>
+      <a href="#contact" class="nav-item-link">CONTACT</a>
+    </div>
+
+    <div class="nav-icons-right">
+      <button class="nav-icon-btn" aria-label="Account">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <circle cx="12" cy="10" r="3.2"/>
+          <path d="M6.5 18.2c1.2-2.2 3.2-3.7 5.5-3.7s4.3 1.5 5.5 3.7"/>
+        </svg>
+      </button>
+      <div class="cart-container">
+        <button class="nav-icon-btn" aria-label="Cart">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>
+          </svg>
+        </button>
+        <span class="cart-badge" id="cartCount">2</span>
+      </div>
+      <!-- HAMBURGER MENU BUTTON (MOBILE) -->
+      <button class="hamburger-btn" id="mobileMenuBtn" onclick="openMobileMenu()" aria-label="Open Navigation Menu">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="16" y2="18"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- TOP RIGHT CHIPS -->
+  <div class="chips-container">
+    <button class="chip-button active" onclick="setChip(this)">NEW</button>
+    <button class="chip-button" onclick="setChip(this)">BEST</button>
+    <button class="chip-button" onclick="setChip(this)">SALE</button>
+  </div>
+
+  <!-- HERO CONTENT (LEFT ALIGNED) -->
+  <div class="hero-content-left">
+    <h1 class="hero-title">DELiCiOUS<br>iCE CREAM</h1>
+    <p class="hero-paragraph">
+      They aren't just about incredible taste, they're designed for your well-being.
+      With innovative strides and smart consideration.
+    </p>
+    <div class="hero-buttons">
+      <a href="#menu" class="btn-primary-order">ORDER NOW</a>
+      <a href="#menu" class="btn-secondary-menu">SEE MENU/ITEMS</a>
+    </div>
+  </div>
+
+  <!-- PRODUCT SLIDER SHOWCASE (CUPS TRACK) -->
+  <div class="track-container" id="track"></div>
+
+  <!-- CONTROLS (BOTTOM CENTER) -->
+  <div class="controls-bar">
+    <button class="arrow-btn" id="prevBtn" aria-label="Previous Flavor">&#8592;</button>
+    <div class="dots" id="dots"></div>
+    <button class="arrow-btn" id="nextBtn" aria-label="Next Flavor">&#8594;</button>
+  </div>
+
+  <!-- SOCIAL PROOF (BOTTOM LEFT) -->
+  <div class="social-proof-bottom">
+    <div class="avatar-group">
+      <img src="https://i.pravatar.cc/80?img=11" class="avatar-item" alt="Avatar 1">
+      <img src="https://i.pravatar.cc/80?img=5"  class="avatar-item" alt="Avatar 2">
+      <img src="https://i.pravatar.cc/80?img=8"  class="avatar-item" alt="Avatar 3">
+    </div>
+    <div class="proof-text">
+      <strong>10K+ Reviews</strong>
+      <span>Customers are satisfied!</span>
+    </div>
+  </div>
+
+  <!-- SOCIAL LINKS (BOTTOM RIGHT) -->
+  <div class="social-links-bottom">
+    <a href="#" class="social-btn" aria-label="Facebook">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+      </svg>
+    </a>
+    <a href="#" class="social-btn" aria-label="Instagram">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+      </svg>
+    </a>
+    <a href="#" class="social-btn" aria-label="YouTube">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.97C18.88 4 12 4 12 4s-6.88 0-8.59.45A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.97C5.12 20 12 20 12 20s6.88 0 8.59-.45a2.78 2.78 0 0 0 1.95-1.97A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/>
+        <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor"/>
+      </svg>
+    </a>
+  </div>
+
+  <!-- ORGANIC WAVE FLOOR BOTTOM -->
+  <div class="wave-floor">
+    <svg viewBox="0 0 1600 240" preserveAspectRatio="none">
+      <path d="M 0,130 C 400,220 400,40 800,130 C 1200,220 1200,40 1600,130 L 1600,240 L 0,240 Z" fill="var(--theme-light-bg)" style="transition: fill 0.75s ease;"/>
+    </svg>
+  </div>
+</div>
+
+<!-- ==========================================
+     SECTION 2: MENU SHOWCASE (#menu)
+     ========================================== -->
+<section class="menu-section" id="menu">
+  <div class="section-header reveal reveal-up">
+    <h2 class="section-title">OUR TOP SW!RLS SELECTION</h2>
+    <p class="section-subtitle">Crafted with organic ingredients & swirled to perfection for guilt-free indulgence.</p>
+  </div>
+
+  <!-- Filter Tabs -->
+  <div class="menu-filter-tabs reveal reveal-up delay-1">
+    <button class="filter-tab-btn active" onclick="filterMenu('all', this)">ALL FLAVORS</button>
+    <button class="filter-tab-btn" onclick="filterMenu('choco', this)">CHOCOLATE</button>
+    <button class="filter-tab-btn" onclick="filterMenu('berry', this)">BERRY</button>
+    <button class="filter-tab-btn" onclick="filterMenu('fruit', this)">FRUIT</button>
+  </div>
+
+  <!-- Grid of Product Cards (Reference Image 1 Layout) -->
+  <div class="menu-grid" id="menuGrid">
+    <!-- Card 1 -->
+    <div class="menu-card reveal reveal-up delay-1" data-category="choco">
+      <div class="card-top-preview">
+        <img src="essentials/choco.png" alt="Chocolate Fudge Brownie" onerror="this.src='essentials/choco.jpg'">
+        <span class="card-rating-badge">4.9 ★</span>
+      </div>
+      <h3 class="card-title">Chocolate Fudge</h3>
+      <p class="card-desc">270 calories per cup • Rich belgian cocoa with gooey brownie chunks.</p>
+      <div class="card-bottom-row">
+        <span class="card-price">$6.50</span>
+        <button class="add-cart-btn" onclick="addToCart('Chocolate Fudge')" aria-label="Add to cart">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="menu-card reveal reveal-up delay-2" data-category="berry">
+      <div class="card-top-preview">
+        <img src="essentials/raspberry.png" alt="Raspberry Rush" onerror="this.src='essentials/raspberry.jpg'">
+        <span class="card-rating-badge">5.0 ★</span>
+      </div>
+      <h3 class="card-title">Raspberry Rush</h3>
+      <p class="card-desc">240 calories per cup • Tart wild raspberries swirled into sweet cream.</p>
+      <div class="card-bottom-row">
+        <span class="card-price">$6.80</span>
+        <button class="add-cart-btn" onclick="addToCart('Raspberry Rush')" aria-label="Add to cart">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="menu-card reveal reveal-up delay-3" data-category="fruit">
+      <div class="card-top-preview">
+        <img src="essentials/banana.png" alt="Banana Pudding" onerror="this.src='essentials/banana.jpg'">
+        <span class="card-rating-badge">4.8 ★</span>
+      </div>
+      <h3 class="card-title">Banana Pudding</h3>
+      <p class="card-desc">250 calories per cup • Real ripe bananas blended with vanilla wafer crust.</p>
+      <div class="card-bottom-row">
+        <span class="card-price">$6.20</span>
+        <button class="add-cart-btn" onclick="addToCart('Banana Pudding')" aria-label="Add to cart">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="menu-card reveal reveal-up delay-4" data-category="choco">
+      <div class="card-top-preview">
+        <img src="essentials/caramel.png" alt="Caramel Crunch Swirl" onerror="this.src='essentials/choco.png'">
+        <span class="card-rating-badge">4.9 ★</span>
+      </div>
+      <h3 class="card-title">Caramel Crunch</h3>
+      <p class="card-desc">280 calories per cup • Salted butter caramel with roasted almond crisps.</p>
+      <div class="card-bottom-row">
+        <span class="card-price">$7.10</span>
+        <button class="add-cart-btn" onclick="addToCart('Caramel Crunch')" aria-label="Add to cart">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="menu-card reveal reveal-up delay-5" data-category="berry">
+      <div class="card-top-preview">
+        <img src="essentials/strawberry.png" alt="Strawberry Bliss" onerror="this.src='essentials/raspberry.png'">
+        <span class="card-rating-badge">4.7 ★</span>
+      </div>
+      <h3 class="card-title">Strawberry Bliss</h3>
+      <p class="card-desc">230 calories per cup • Organic strawberry reduction with fresh fruit pieces.</p>
+      <div class="card-bottom-row">
+        <span class="card-price">$6.40</span>
+        <button class="add-cart-btn" onclick="addToCart('Strawberry Bliss')" aria-label="Add to cart">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Card 6 -->
+    <div class="menu-card reveal reveal-up delay-6" data-category="choco">
+      <div class="card-top-preview">
+        <img src="essentials/mintdarkchoco.png" alt="Mint Choco Chip" onerror="this.src='essentials/choco.png'">
+        <span class="card-rating-badge">4.9 ★</span>
+      </div>
+      <h3 class="card-title">Mint Dark Choco</h3>
+      <p class="card-desc">260 calories per cup • Refreshing peppermint extract with dark cocoa flakes.</p>
+      <div class="card-bottom-row">
+        <span class="card-price">$6.90</span>
+        <button class="add-cart-btn" onclick="addToCart('Mint Dark Choco')" aria-label="Add to cart">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================
+     SECTION 3: ABOUT SW!RLS (#about) — Reference Image 1 Layout
+     ========================================== -->
+<section class="about-section" id="about">
+  <!-- TOP WAVE OVERLAY -->
+  <div class="about-wave-top">
+    <svg viewBox="0 0 1600 160" preserveAspectRatio="none">
+      <path d="M 0,80 C 400,160 400,10 800,90 C 1200,170 1200,10 1600,80 L 1600,160 L 0,160 Z" fill="var(--theme-dark-bg)" style="transition: fill 0.75s ease;"/>
+    </svg>
+  </div>
+
+  <div class="section-header reveal reveal-up" style="margin-bottom: 60px;">
+    <h2 class="section-title" style="color: #ffffff;">SW!RLS iS ABOUT</h2>
+    <p class="section-subtitle" style="color: rgba(255,255,255,0.7);">Four core pillars that set our ice cream apart from ordinary desserts.</p>
+  </div>
+
+  <div class="about-layout-container">
+    <!-- Left Feature Columns -->
+    <div class="feature-col">
+      <div class="feature-box reveal reveal-left delay-1">
+        <div class="feature-num">01</div>
+        <h3 class="feature-box-title">Organic Farm Dairy</h3>
+        <p class="feature-box-desc">Our passion starts with ethically sourced milk and fresh mountain berries for pure taste.</p>
+      </div>
+
+      <div class="feature-box reveal reveal-left delay-2">
+        <div class="feature-num">02</div>
+        <h3 class="feature-box-title">Atmosphere & Joy</h3>
+        <p class="feature-box-desc">Every single cup is designed to bring happiness, energy, and inspiration to your day.</p>
+      </div>
+    </div>
+
+    <!-- Center Showcase Cup (Matching Image 1 center cup focal point) -->
+    <div class="about-center-showcase reveal reveal-scale delay-1">
+      <div class="about-cup-container">
+        <img src="essentials/choco.png" alt="SW!RLS Cup" class="about-cup-img" id="aboutCupImg" onerror="this.src='essentials/choco.jpg'">
+      </div>
+      <button class="btn-primary-order" onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})">ORDER YOUR CUP</button>
+    </div>
+
+    <!-- Right Feature Columns -->
+    <div class="feature-col">
+      <div class="feature-box reveal reveal-right delay-1">
+        <div class="feature-num">03</div>
+        <h3 class="feature-box-title">Personalized Flavors</h3>
+        <p class="feature-box-desc">We craft unique seasonal flavor profiles tailored specifically for health-conscious foodies.</p>
+      </div>
+
+      <div class="feature-box reveal reveal-right delay-2">
+        <div class="feature-num">04</div>
+        <h3 class="feature-box-title">Master Craftsmen</h3>
+        <p class="feature-box-desc">Our expert dessert chefs combine decades of culinary mastery in every slow-churned batch.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================
+     SECTION 4: FLAVOR QUIZ & CONTACT (#contact)
+     ========================================== -->
+<section class="quiz-section" id="contact">
+  <!-- TOP WAVE OVERLAY -->
+  <div class="quiz-wave-top">
+    <svg viewBox="0 0 1600 160" preserveAspectRatio="none">
+      <path d="M 0,80 C 400,10 400,160 800,80 C 1200,10 1200,160 1600,80 L 1600,160 L 0,160 Z" fill="var(--theme-light-bg)" style="transition: fill 0.75s ease;"/>
+    </svg>
+  </div>
+  <!-- Quiz Card Banner (Matching Reference Image 1 Banner Box) -->
+  <div class="quiz-card-banner reveal reveal-scale">
+    <span class="quiz-badge">INTERACTIVE FLAVOR FINDER</span>
+    <h2 class="quiz-title">Find Out Which SW!RLS Match Your Personality</h2>
+    <p class="quiz-desc">Answer 2 quick questions to discover your personalized ice cream flavor profile!</p>
+
+    <div class="quiz-options-grid">
+      <div class="quiz-opt-card reveal reveal-up delay-1" onclick="selectQuizOpt(this, 'rich')">
+        <div class="quiz-opt-title">🍫 Rich & Indulgent</div>
+        <div class="quiz-opt-sub">You love deep cocoa & decadent treats.</div>
+      </div>
+      <div class="quiz-opt-card reveal reveal-up delay-2" onclick="selectQuizOpt(this, 'berry')">
+        <div class="quiz-opt-title">🍓 Fruity & Refreshing</div>
+        <div class="quiz-opt-sub">You love tart berries & vibrant citrus.</div>
+      </div>
+      <div class="quiz-opt-card reveal reveal-up delay-3" onclick="selectQuizOpt(this, 'sweet')">
+        <div class="quiz-opt-title">🍌 Creamy & Sweet</div>
+        <div class="quiz-opt-sub">You love smooth banana & vanilla wafers.</div>
+      </div>
+    </div>
+
+    <div class="quiz-result-box" id="quizResult">
+      <div class="quiz-result-title" id="quizMatchText">Your Perfect Match: Chocolate Fudge Brownie!</div>
+      <button class="btn-primary-order" style="margin-top: 14px;" onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})">GET THIS FLAVOR NOW</button>
+    </div>
+  </div>
+
+  <!-- Contact Form Section -->
+  <div class="contact-grid">
+    <div class="contact-info-side reveal reveal-left">
+      <h3>GET IN TOUCH</h3>
+      <p>Have questions about bulk orders, events, or ingredient nutrition? Send us a message and our team will get back to you within 24 hours!</p>
+      <div style="font-weight: 800; color: #3d1a06; font-size: 1.1rem; margin-bottom: 8px;">📍 Headquarters</div>
+      <p style="margin-bottom: 16px;">124 Swirl Avenue, Dessert District, CA 90210</p>
+      <div style="font-weight: 800; color: #3d1a06; font-size: 1.1rem; margin-bottom: 8px;">✉️ Email Us</div>
+      <p>hello@swirls-icecream.com</p>
+    </div>
+
+    <form class="contact-form reveal reveal-right" onsubmit="handleContactSubmit(event)">
+      <input type="text" class="form-input" placeholder="Your Name" required>
+      <input type="email" class="form-input" placeholder="Your Email Address" required>
+      <textarea class="form-textarea" placeholder="Your Message or Special Request..." required></textarea>
+      <button type="submit" class="btn-secondary-menu" style="align-self: flex-start;">SEND MESSAGE</button>
+    </form>
+  </div>
+</section>
+
+<!-- ==========================================
+     SECTION 5: FOOTER
+     ========================================== -->
+<footer class="footer-section">
+  <div class="footer-container">
+    <div class="footer-brand">
+      <img src="essentials/SWIRLS.png" alt="SW!RLS®" onerror="this.src='../SWIRLS.png'">
+      <p>Crafted for your well-being with incredible taste and smart consideration.</p>
+    </div>
+
+    <div class="footer-col">
+      <h4>QUICK LINKS</h4>
+      <ul class="footer-links">
+        <li><a href="#home">Home Showcase</a></li>
+        <li><a href="#menu">Top Selection</a></li>
+        <li><a href="#about">About SW!RLS</a></li>
+        <li><a href="#contact">Personality Quiz</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>FLAVORS</h4>
+      <ul class="footer-links">
+        <li><a href="#menu">Chocolate Fudge</a></li>
+        <li><a href="#menu">Raspberry Rush</a></li>
+        <li><a href="#menu">Banana Pudding</a></li>
+        <li><a href="#menu">Caramel Crunch</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>GET UPDATES</h4>
+      <p style="font-size: 0.88rem; color: rgba(255,255,255,0.7); margin-bottom: 14px;">Subscribe for secret seasonal drops & special offers.</p>
+      <div style="display: flex; gap: 8px;">
+        <input type="email" placeholder="Your email..." class="footer-newsletter-input">
+        <button type="button" class="footer-newsletter-btn">JOIN</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div>© 2026 SW!RLS® Ice Cream Inc. All rights reserved.</div>
+    <div style="display: flex; gap: 20px;">
+      <a href="#" style="color: inherit; text-decoration: none;">Privacy Policy</a>
+      <a href="#" style="color: inherit; text-decoration: none;">Terms of Service</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ==========================================
+     JAVASCRIPT INTERACTIVITY
+     ========================================== -->
+<script>
+const flavors = [
+  {
+    name: "Chocolate Fudge Brownie",
+    bgId: "bg-choco",
+    img: "essentials/choco.png",
+    fallback: "essentials/choco.jpg",
+    theme: {
+      primary: "#3d1a06",
+      secondaryBtn: "#542b15",
+      btnShadow: "#180601",
+      orderText: "#240d04",
+      subtext: "#7a5040",
+      socialBtn: "rgba(90, 44, 16, 0.14)",
+      socialIcon: "#5a2c10",
+      lightBg: "#faf1e4",
+      darkBg: "#240d04",
+      cardText: "#3d1a06",
+      cardDesc: "#7a5040",
+      previewBg: "radial-gradient(circle at center, rgba(250, 241, 228, 0.8) 0%, rgba(240, 225, 205, 0.4) 100%)"
+    }
+  },
+  {
+    name: "Raspberry Rush",
+    bgId: "bg-raspberry",
+    img: "essentials/raspberry.png",
+    fallback: "essentials/raspberry.jpg",
+    theme: {
+      primary: "#85163b",
+      secondaryBtn: "#8c173e",
+      btnShadow: "#180601",
+      orderText: "#5e0b24",
+      subtext: "#9e2f54",
+      socialBtn: "rgba(133, 22, 59, 0.16)",
+      socialIcon: "#85163b",
+      lightBg: "#fff0f5",
+      darkBg: "#3a0818",
+      cardText: "#610a28",
+      cardDesc: "#9c2d54",
+      previewBg: "radial-gradient(circle at center, rgba(255, 230, 238, 0.8) 0%, rgba(245, 200, 218, 0.4) 100%)"
+    }
+  },
+  {
+    name: "Banana Pudding",
+    bgId: "bg-banana",
+    img: "essentials/banana.png",
+    fallback: "essentials/banana.jpg",
+    theme: {
+      primary: "#785006",
+      secondaryBtn: "#82580a",
+      btnShadow: "#180601",
+      orderText: "#4a2f02",
+      subtext: "#946b15",
+      socialBtn: "rgba(120, 80, 6, 0.16)",
+      socialIcon: "#785006",
+      lightBg: "#fffdf0",
+      darkBg: "#2d1d02",
+      cardText: "#4d3202",
+      cardDesc: "#875f13",
+      previewBg: "radial-gradient(circle at center, rgba(255, 250, 220, 0.8) 0%, rgba(245, 230, 180, 0.4) 100%)"
+    }
+  },
+  {
+    name: "Caramel Crunch",
+    bgId: "bg-caramel",
+    img: "essentials/caramel.png",
+    fallback: "essentials/choco.png",
+    theme: {
+      primary: "#8a4f08",
+      secondaryBtn: "#96590d",
+      btnShadow: "#180601",
+      orderText: "#4a2802",
+      subtext: "#a16616",
+      socialBtn: "rgba(138, 79, 8, 0.16)",
+      socialIcon: "#8a4f08",
+      lightBg: "#fffbf2",
+      darkBg: "#301a02",
+      cardText: "#4a2802",
+      cardDesc: "#9e6414",
+      previewBg: "radial-gradient(circle at center, rgba(255, 246, 225, 0.8) 0%, rgba(245, 220, 175, 0.4) 100%)"
+    }
+  },
+  {
+    name: "Strawberry Bliss",
+    bgId: "bg-strawberry",
+    img: "essentials/strawberry.png",
+    fallback: "essentials/raspberry.png",
+    theme: {
+      primary: "#a82848",
+      secondaryBtn: "#b33252",
+      btnShadow: "#180601",
+      orderText: "#5e1024",
+      subtext: "#b84260",
+      socialBtn: "rgba(168, 40, 72, 0.16)",
+      socialIcon: "#a82848",
+      lightBg: "#fff2f5",
+      darkBg: "#3d0c18",
+      cardText: "#611024",
+      cardDesc: "#b03f5d",
+      previewBg: "radial-gradient(circle at center, rgba(255, 232, 238, 0.8) 0%, rgba(245, 202, 215, 0.4) 100%)"
+    }
+  },
+  {
+    name: "Mint Dark Choco",
+    bgId: "bg-mint",
+    img: "essentials/mintdarkchoco.png",
+    fallback: "essentials/choco.png",
+    theme: {
+      primary: "#185942",
+      secondaryBtn: "#1e6b50",
+      btnShadow: "#180601",
+      orderText: "#0a3023",
+      subtext: "#2a7a5e",
+      socialBtn: "rgba(24, 89, 66, 0.16)",
+      socialIcon: "#185942",
+      lightBg: "#f0faf6",
+      darkBg: "#0a241b",
+      cardText: "#0d3829",
+      cardDesc: "#2a7d61",
+      previewBg: "radial-gradient(circle at center, rgba(225, 250, 240, 0.8) 0%, rgba(185, 235, 215, 0.4) 100%)"
+    }
+  }
+];
+
+let active = 0;
+const SPACING = 210;
+const SCALE_STEP = 0.28;
+
+const track = document.getElementById('track');
+const dotsEl = document.getElementById('dots');
+
+// Build cups and dots
+flavors.forEach((f, i) => {
+  const cup = document.createElement('div');
+  cup.className = 'cup';
+  cup.dataset.index = i;
+  cup.innerHTML = `
+    <img src="${f.img}" alt="${f.name}" onerror="this.src='${f.fallback}'">
+    <div class="shadow-ellipse"></div>
+  `;
+  cup.addEventListener('click', () => { active = i; update(); restartTimer(); });
+  track.appendChild(cup);
+
+  const dot = document.createElement('div');
+  dot.className = 'dot';
+  dot.addEventListener('click', () => { active = i; update(); restartTimer(); });
+  dotsEl.appendChild(dot);
+});
+
+function update() {
+  const f = flavors[active];
+  const t = f.theme;
+
+  document.documentElement.style.setProperty('--theme-primary', t.primary);
+  document.documentElement.style.setProperty('--theme-secondary-btn', t.secondaryBtn);
+  document.documentElement.style.setProperty('--theme-btn-shadow', t.btnShadow);
+  document.documentElement.style.setProperty('--theme-order-text', t.orderText);
+  document.documentElement.style.setProperty('--theme-subtext', t.subtext);
+  document.documentElement.style.setProperty('--theme-social-btn', t.socialBtn);
+  document.documentElement.style.setProperty('--theme-social-icon', t.socialIcon);
+  document.documentElement.style.setProperty('--theme-light-bg', t.lightBg);
+  document.documentElement.style.setProperty('--theme-dark-bg', t.darkBg);
+  document.documentElement.style.setProperty('--theme-card-text', t.cardText);
+  document.documentElement.style.setProperty('--theme-card-desc', t.cardDesc);
+  document.documentElement.style.setProperty('--theme-preview-bg', t.previewBg);
+
+  // Background crossfade
+  flavors.forEach(fl => {
+    const bgEl = document.getElementById(fl.bgId);
+    if (bgEl) bgEl.classList.toggle('on', fl.bgId === f.bgId);
+  });
+
+  const isMobile = window.innerWidth <= 768;
+
+  // Cups transforms
+  document.querySelectorAll('.cup').forEach((el, i) => {
+    if (isMobile) {
+      // Mobile: show active cup centered below buttons with zero overlap
+      if (i === active) {
+        el.style.transform = 'translateX(-50%) scale(1)';
+        el.style.left = '50%';
+        el.style.top = '10px';
+        el.style.bottom = 'auto';
+        el.style.zIndex = '10';
+        el.style.opacity = '1';
+        el.classList.remove('dim');
+      } else {
+        el.style.opacity = '0';
+        el.style.zIndex = '0';
+        el.style.transform = 'translateX(-50%) scale(0.8)';
+        el.style.left = '50%';
+        el.style.top = '10px';
+        el.style.bottom = 'auto';
+        el.classList.add('dim');
+      }
+    } else {
+      // Desktop: 3D fan-out
+      const offset = (i - active + flavors.length) % flavors.length;
+      const dist = offset;
+      const x = offset * SPACING;
+      const scale = Math.max(1 - dist * SCALE_STEP, 0.48);
+      const y = dist * 22;
+      const z = 100 - dist;
+
+      el.style.transform = `translateX(${x}px) translateY(${y}px) scale(${scale})`;
+      el.style.left = '';
+      el.style.bottom = '';
+      el.style.top = '';
+      el.style.zIndex = z;
+      el.style.opacity = dist > 3 ? 0 : 1;
+      el.classList.toggle('dim', dist !== 0);
+    }
+  });
+
+  // Dots indicator
+  document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('on', i === active));
+}
+
+// MOBILE NAVIGATION DRAWER TOGGLE LOGIC
+function openMobileMenu() {
+  const drawer = document.getElementById('mobileNavDrawer');
+  const overlay = document.getElementById('mobileNavOverlay');
+  if (drawer && overlay) {
+    drawer.classList.add('open');
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeMobileMenu() {
+  const drawer = document.getElementById('mobileNavDrawer');
+  const overlay = document.getElementById('mobileNavOverlay');
+  if (drawer && overlay) {
+    drawer.classList.remove('open');
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+}
+
+// Initial call to set active theme immediately on page load
+update();
+
+// HERO STAGE CAROUSEL AUTO-CYCLE TIMER (every 2 seconds)
+let autoCycleTimer = null;
+
+function nextSlide() {
+  active = (active + 1) % flavors.length;
+  update();
+}
+
+function prevSlide() {
+  active = (active - 1 + flavors.length) % flavors.length;
+  update();
+}
+
+function startAutoCycle() {
+  if (!autoCycleTimer && window.scrollY <= 300) {
+    autoCycleTimer = setInterval(nextSlide, 2000);
+  }
+}
+
+function stopAutoCycle() {
+  if (autoCycleTimer) {
+    clearInterval(autoCycleTimer);
+    autoCycleTimer = null;
+  }
+}
+
+function restartTimer() {
+  stopAutoCycle();
+  startAutoCycle();
+}
+
+// Start auto cycle immediately on page load
+startAutoCycle();
+
+// Controls handlers
+document.getElementById('prevBtn').addEventListener('click', () => {
+  prevSlide();
+  restartTimer();
+});
+
+document.getElementById('nextBtn').addEventListener('click', () => {
+  nextSlide();
+  restartTimer();
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowLeft')  { prevSlide(); restartTimer(); }
+  if (e.key === 'ArrowRight') { nextSlide(); restartTimer(); }
+});
+
+// Scroll listener: ONLY stop auto changing when scrolled below hero section
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 300) {
+    stopAutoCycle();
+  } else {
+    startAutoCycle();
+  }
+});
+
+// Resize listener: recalculate cup layout on orientation change / resize
+let resizeTimeout;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimeout);
+  resizeTimeout = setTimeout(() => update(), 100);
+});
+
+// FIGMA / POWERPOINT SCROLL REVEAL OBSERVER
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('active');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// ABOUT SECTION CENTER CUP AUTO-SWITCHER (1 second per cup, colors stay unchanged)
+const aboutCupImages = [
+  'essentials/choco.png',
+  'essentials/raspberry.png',
+  'essentials/banana.png',
+  'essentials/caramel.png',
+  'essentials/strawberry.png',
+  'essentials/mintdarkchoco.png'
+];
+let aboutCupIdx = 0;
+const aboutCupImgEl = document.getElementById('aboutCupImg');
+
+if (aboutCupImgEl) {
+  setInterval(() => {
+    aboutCupIdx = (aboutCupIdx + 1) % aboutCupImages.length;
+    aboutCupImgEl.style.opacity = '0';
+    setTimeout(() => {
+      aboutCupImgEl.src = aboutCupImages[aboutCupIdx];
+      aboutCupImgEl.style.opacity = '1';
+    }, 200);
+  }, 1000);
+}
+
+function setChip(btn) {
+  document.querySelectorAll('.chip-button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// Cart Incrementor Interactivity
+let currentCartCount = 2;
+function addToCart(itemName) {
+  currentCartCount++;
+  const badge = document.getElementById('cartCount');
+  badge.textContent = currentCartCount;
+  badge.style.transform = 'scale(1.4)';
+  setTimeout(() => badge.style.transform = 'scale(1)', 200);
+}
+
+// Menu Category Filtering
+function filterMenu(cat, btn) {
+  document.querySelectorAll('.filter-tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  const cards = document.querySelectorAll('.menu-card');
+  cards.forEach(card => {
+    if (cat === 'all' || card.dataset.category === cat) {
+      card.style.display = 'flex';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+
+// Interactive Personality Quiz
+function selectQuizOpt(card, type) {
+  document.querySelectorAll('.quiz-opt-card').forEach(c => c.classList.remove('selected'));
+  card.classList.add('selected');
+
+  const resBox = document.getElementById('quizResult');
+  const resText = document.getElementById('quizMatchText');
+  resBox.style.display = 'block';
+
+  if (type === 'rich') {
+    resText.textContent = "Your Perfect Match: Chocolate Fudge Brownie! 🍫";
+  } else if (type === 'berry') {
+    resText.textContent = "Your Perfect Match: Raspberry Rush! 🍓";
+  } else {
+    resText.textContent = "Your Perfect Match: Banana Pudding! 🍌";
+  }
+}
+
+// Contact Form Handler
+function handleContactSubmit(e) {
+  e.preventDefault();
+  alert("Thank you! Your message has been sent successfully. We'll be in touch soon!");
+  e.target.reset();
+}
+
+// Highlight Active Nav Item on Scroll
+window.addEventListener('scroll', () => {
+  const sections = document.querySelectorAll('div.hero-stage, section');
+  const navLinks = document.querySelectorAll('.nav-item-link');
+
+  let current = '';
+  sections.forEach(sec => {
+    const secTop = sec.offsetTop - 150;
+    if (window.scrollY >= secTop) {
+      current = sec.getAttribute('id');
+    }
+  });
+
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('href') === '#' + current) {
+      link.classList.add('active');
+    }
+  });
+});
+
+// Initial render
+update();
+</script>
+</body>
+</html>
